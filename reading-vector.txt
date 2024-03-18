@@ -1,0 +1,24 @@
+.data
+vector: .word 30,31,32,33,34,35,36
+text1: .asciz "\nEscolha de 0 a 6\n"
+
+.text
+la s0, vector
+
+addi a7, zero, 4
+la a0, text1
+ecall
+
+addi a7, zero 5
+ecall
+add t2, a0, zero
+
+addi t1, zero, 4
+mul t0, t1, t2
+
+add s1, s0, t0
+lw t3, 0(s1)
+
+add a0, t3, zero
+addi a7, zero, 1
+ecall 
