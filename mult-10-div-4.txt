@@ -1,0 +1,14 @@
+.data
+.text
+addi a1, zero, 5
+addi a7, zero, 1
+add a0, a1, zero
+ecall
+
+srai a0, a1, 2 
+ecall
+
+slli t0, a1, 3
+slli t1, a1, 1
+add a0, t0, t1
+ecall

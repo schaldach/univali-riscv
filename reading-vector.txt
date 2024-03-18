@@ -11,10 +11,9 @@ ecall
 
 addi a7, zero 5
 ecall
-add t2, a0, zero
+add t1, a0, zero
 
-addi t1, zero, 4
-mul t0, t1, t2
+slli t0, t1, 2 
 
 add s1, s0, t0
 lw t3, 0(s1)
