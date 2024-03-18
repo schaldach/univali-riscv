@@ -1,0 +1,9 @@
+.data
+.text
+addi a7, zero, 1
+addi a0, zero, 15
+ecall
+
+addi t0, zero -1
+xor a0, a0, t0
+ecall
