@@ -1,0 +1,10 @@
+.data
+.text
+addi a7, zero, 1
+addi s0, zero, 0
+addi s1, zero, 10
+
+Loop: add a0, s0, zero
+ecall
+addi s0, s0, 1
+bne s0, s1, Loop
