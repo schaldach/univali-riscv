@@ -1,0 +1,46 @@
+.data
+vector: .word 9,3,6,4,2,8,4,8,9,7,8,5
+.text
+la s0, vector
+
+BubbleLoop: 
+jal zero, CheckSortedLoop
+beq s3
+
+CheckSortedLoop:
+addi s1, zero, 0
+
+CheckSorted: 
+addi s3, zero, 0
+
+addi t0, zero, 4
+mul t0, t0, s1
+add t1, s0, t0
+lw t2, 0(t1)
+lw t4, 4(t1)
+bge t2, t4, Main
+beq t4, zero, Bubble
+Main:
+addi t3, t3, 1 
+jal zero, CheckSorted
+
+
+Print:
+addi s1, zero, 0
+
+PrintLoop: 
+addi a7, zero, 1
+
+addi t0, zero, 4
+mul t0, t0, s1
+
+add t1, s0, t0
+
+lw t2, 0(t1)
+beq t2, s2, Fim
+add a0, t2, zero
+
+ecall
+addi s1, s1, 1
+jal zero, PrintLoop
+Fim:

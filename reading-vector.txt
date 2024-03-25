@@ -1,23 +1,23 @@
 .data
-vector: .word 30,31,32,33,34,35,36
-text1: .asciz "\nEscolha de 0 a 6\n"
-
+vector: .word 9,3,6,4,2,8,4,8,9,7,8,5
 .text
 la s0, vector
+addi s1, zero, 0
+addi s2, zero, 0
 
-addi a7, zero, 4
-la a0, text1
-ecall
-
-addi a7, zero 5
-ecall
-add t1, a0, zero
-
-slli t0, t1, 2 
-
-add s1, s0, t0
-lw t3, 0(s1)
-
-add a0, t3, zero
+Loop: 
 addi a7, zero, 1
-ecall 
+
+addi t0, zero, 4
+mul t0, t0, s1
+
+add t1, s0, t0
+
+lw t2, 0(t1)
+beq t2, s2, Fim
+add a0, t2, zero
+
+ecall
+addi s1, s1, 1
+jal zero, Loop
+Fim:
