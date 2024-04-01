@@ -1,29 +1,38 @@
 .data
-vector: .word 9,3,6,4,2,8,4,8,9,7,8,5
+#vector: .word 9,3,6,4,2,8,4,8,9,7,8,5
+vector: .word 9,3,2,8,4
+#vector: .word 3,6,7,8,9
 .text
-la s0, vector
+la s0, vector 
+addi s7, zero, 4
 
-BubbleLoop: 
-jal zero, CheckSortedLoop
-beq s3
-
-CheckSortedLoop:
+Bubble:
 addi s1, zero, 0
 
-CheckSorted: 
-addi s3, zero, 0
+SortedLoop:
+mul t2, s1, s7
+add t2, s0, t2
+lw t0, 0(t2)
+lw t1, 4(t2)
+beq t1, zero, Print
+bgt t0, t1, BubbleSorting
+addi s1, s1, 1
+jal zero, SortedLoop
 
-addi t0, zero, 4
-mul t0, t0, s1
-add t1, s0, t0
-lw t2, 0(t1)
-lw t4, 4(t1)
-bge t2, t4, Main
-beq t4, zero, Bubble
-Main:
-addi t3, t3, 1 
-jal zero, CheckSorted
-
+BubbleSorting:
+addi s1, zero, 0
+BubbleSortingLoop:
+mul t2, s1, s7
+add t2, s0, t2
+lw t0, 0(t2)
+lw t1, 4(t2)
+beq t1, zero, Bubble
+ble t0, t1, ContinueBubbleLoop
+sw t1, 0(t2)
+sw t0, 4(t2)
+ContinueBubbleLoop:
+addi s1, s1, 1
+jal zero, BubbleSortingLoop
 
 Print:
 addi s1, zero, 0
@@ -37,7 +46,7 @@ mul t0, t0, s1
 add t1, s0, t0
 
 lw t2, 0(t1)
-beq t2, s2, Fim
+beq t2, zero, Fim
 add a0, t2, zero
 
 ecall

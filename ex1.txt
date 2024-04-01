@@ -1,0 +1,45 @@
+.data
+msg1: .asciz "Digite o primeiro número\n"
+msg2: .asciz "Digite o segundo número\n"
+msg3: .asciz "Digite 1 para somar, 2 para subtrair e 3 para multiplicar\n"
+.text
+la a0, msg1
+addi a7, zero, 4
+ecall
+addi a7, zero, 5
+ecall
+add s0, a0, zero
+
+la a0, msg2
+addi a7, zero, 4
+ecall
+addi a7, zero, 5
+ecall
+add s1, a0, zero
+
+la a0, msg3
+addi a7, zero, 4
+ecall
+addi a7, zero, 5
+ecall
+add s2, a0, zero
+
+addi t0, zero, 1
+addi t1, zero, 2
+addi t2, zero, 3
+
+beq s2, t0, Add
+beq s2, t1, Sub
+beq s2, t2, Mul
+Add:
+add a0, s0, s1
+jal Fim
+Sub:
+sub a0, s0, s1
+jal Fim
+Mul:
+mul a0, s0, s1
+
+Fim:
+addi a7, zero, 1
+ecall
