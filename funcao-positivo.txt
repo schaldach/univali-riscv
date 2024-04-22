@@ -1,0 +1,23 @@
+.data
+m1: .asciz "É positivo"
+m2: .asciz "É negativo"
+.text
+jal zero, main
+
+isPositive:
+la a0, m2
+ble s0, zero, isPositiveEnd
+la a0, m1
+isPositiveEnd:
+jalr zero, ra, 0
+
+main:
+addi a7, zero, 5
+ecall
+add s0, a0, zero
+#O parâmetro é o próprio s0 que é passado, e o retorno é no próprio registrador a0
+jal ra, isPositive
+
+addi a7, zero, 4
+ecall
+Fim:
