@@ -20,4 +20,4 @@ main:
 	addi a7, zero, 1
 	ecall
 	addi a0, a1, 0
-	
+	ecall
