@@ -1,0 +1,23 @@
+jal main
+
+mod:
+	addi t0, zero, 0
+	loop_start:
+	addi t0, t0, 1
+	sub a0, a0, a1
+	blt a0, a1, mod_end
+	jal loop_start
+	mod_end:
+	addi a1, a0, 0
+	addi a0, t0, 0
+	jalr ra
+
+main:
+	addi a0, zero, 10
+	addi a1, zero, 6
+	jal mod
+	
+	addi a7, zero, 1
+	ecall
+	addi a0, a1, 0
+	
