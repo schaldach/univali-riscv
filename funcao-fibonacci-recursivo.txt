@@ -1,0 +1,36 @@
+jal main
+
+fibonacci:
+	sw s0, 0(sp) # Contador
+	sw s1, 4(sp) # n1
+	sw s2, 8(sp) # n2
+	sw ra, 12(sp)
+	addi sp, sp, -16
+	
+	addi s0, zero, 0
+	addi s1, zero, 0
+	addi s2, zero, 1
+	
+	fibonacci_loop:
+		beq s0, a0, fibonacci_fim
+		addi s0, s0, 1
+		addi t0, s2, 0
+		add s2, s2, s1
+		addi s1, t0, 0
+		jal zero, fibonacci_loop
+	
+	fibonacci_fim:
+		addi a0, s0, 0
+		addi sp, sp, 16
+		lw s0, 0(sp)
+		lw s1, 4(sp) 
+		lw s2, 8(sp) 
+		lw ra, 12(sp)
+		jalr zero, ra, 0
+
+main:
+	addi a0, zero, 6
+	jal ra, fibonacci
+	
+	addi a7, zero, 1
+	ecall
